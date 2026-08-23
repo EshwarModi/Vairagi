@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Vairagi</string>
+    <string name="notification_channel_name">Vairagi Active Tracking</string>
+    <string name="notification_channel_desc">Persistent notification required for background screen-time tracking and interruptions</string>
+    <string name="notification_title">Vairagi Screen-Time Monitor</string>
+    <string name="notification_text">Actively monitoring screen session &amp; continuous streak</string>
+</resources>

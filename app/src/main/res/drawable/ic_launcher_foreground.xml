@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Thin Branch at Top -->
+    <path
+        android:pathData="M38,26 C44,30 48,36 50,42"
+        android:strokeWidth="2"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="38"
+                android:startY="26"
+                android:endX="50"
+                android:endY="42"
+                android:type="linear">
+                <item android:color="#1B3A2E" android:offset="0.0" />
+                <item android:color="#4A7C59" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Detached Falling Leaf -->
+    <path
+        android:pathData="M54,46 C66,38 78,46 72,58 C60,64 52,56 54,46 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="38"
+                android:endX="78"
+                android:endY="64"
+                android:type="linear">
+                <item android:color="#8FBC94" android:offset="0.0" />
+                <item android:color="#4A7C59" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Leaf Center Vein -->
+    <path
+        android:pathData="M54,46 Q64,52 72,58"
+        android:strokeColor="#1B3A2E"
+        android:strokeWidth="1"
+        android:strokeLineCap="round" />
+
+    <!-- Curved Motion Lines -->
+    <path
+        android:pathData="M48,40 Q52,36 56,38"
+        android:strokeColor="#8FBC94"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round" />
+
+    <path
+        android:pathData="M44,46 Q48,42 52,44"
+        android:strokeColor="#8FBC94"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round" />
+
+    <!-- Small Drifting Particles -->
+    <path
+        android:fillColor="#4A7C59"
+        android:pathData="M76,38 A2,2 0 1,0 76,42 A2,2 0 1,0 76,38 Z" />
+
+    <path
+        android:fillColor="#8FBC94"
+        android:pathData="M80,48 A1.5,1.5 0 1,0 80,51 A1.5,1.5 0 1,0 80,48 Z" />
+
+</vector>
