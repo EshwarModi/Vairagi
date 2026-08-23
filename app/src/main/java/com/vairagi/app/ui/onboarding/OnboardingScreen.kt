@@ -34,10 +34,13 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.vairagi.app.data.PreferencesManager
 import com.vairagi.app.ui.theme.*
 import kotlinx.coroutines.launch
@@ -48,16 +51,24 @@ fun OnboardingScreen(
     onOnboardingComplete: () -> Unit
 ) {
     val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
     val preferencesManager = remember { PreferencesManager(context) }
 
     var hasUsageStats by remember { mutableStateOf(checkUsageStatsPermission(context)) }
     var hasOverlay by remember { mutableStateOf(Settings.canDrawOverlays(context)) }
 
-    DisposableEffect(Unit) {
-        hasUsageStats = checkUsageStatsPermission(context)
-        hasOverlay = Settings.canDrawOverlays(context)
-        onDispose { }
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                hasUsageStats = checkUsageStatsPermission(context)
+                hasOverlay = Settings.canDrawOverlays(context)
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
     }
 
     val pageCount = 5
@@ -134,17 +145,25 @@ fun OnboardingScreen(
                 } else {
                     Button(
                         onClick = {
-                            coroutineScope.launch {
-                                preferencesManager.updateSettings { it.copy(cumulativeIntervalMinutes = selectedIntentionMinutes.toInt()) }
-                                onOnboardingComplete()
+                            if (hasUsageStats && hasOverlay) {
+                                coroutineScope.launch {
+                                    preferencesManager.updateSettings { it.copy(cumulativeIntervalMinutes = selectedIntentionMinutes.toInt()) }
+                                    onOnboardingComplete()
+                                }
+                            } else {
+                                coroutineScope.launch {
+                                    pagerState.animateScrollToPage(2)
+                                }
                             }
                         },
-                        enabled = hasUsageStats && hasOverlay,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(54.dp),
                         shape = HeroCardShape,
-                        colors = ButtonDefaults.buttonColors(containerColor = LivingLeaf, contentColor = WarmParchment)
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (hasUsageStats && hasOverlay) LivingLeaf else ForestSage,
+                            contentColor = WarmParchment
+                        )
                     ) {
                         Text(
                             text = if (hasUsageStats && hasOverlay) "Begin Mindful Journey" else "Grant Required Permissions",
