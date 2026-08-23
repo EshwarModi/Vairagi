@@ -42,7 +42,7 @@ class AppUsageWidgetProvider : AppWidgetProvider() {
                     if (app1.iconBitmap != null) {
                         views.setImageViewBitmap(R.id.widget_app1_icon, app1.iconBitmap)
                     } else {
-                        views.setImageViewResource(R.id.widget_app1_icon, R.drawable.ic_launcher_foreground)
+                        views.setImageViewResource(R.id.widget_app1_icon, R.drawable.ic_widget_leaf)
                     }
                 } else {
                     views.setViewVisibility(R.id.widget_app1_container, View.GONE)
@@ -57,7 +57,7 @@ class AppUsageWidgetProvider : AppWidgetProvider() {
                     if (app2.iconBitmap != null) {
                         views.setImageViewBitmap(R.id.widget_app2_icon, app2.iconBitmap)
                     } else {
-                        views.setImageViewResource(R.id.widget_app2_icon, R.drawable.ic_launcher_foreground)
+                        views.setImageViewResource(R.id.widget_app2_icon, R.drawable.ic_widget_leaf)
                     }
                 } else {
                     views.setViewVisibility(R.id.widget_app2_container, View.GONE)
@@ -72,7 +72,7 @@ class AppUsageWidgetProvider : AppWidgetProvider() {
                     if (app3.iconBitmap != null) {
                         views.setImageViewBitmap(R.id.widget_app3_icon, app3.iconBitmap)
                     } else {
-                        views.setImageViewResource(R.id.widget_app3_icon, R.drawable.ic_launcher_foreground)
+                        views.setImageViewResource(R.id.widget_app3_icon, R.drawable.ic_widget_leaf)
                     }
                 } else {
                     views.setViewVisibility(R.id.widget_app3_container, View.GONE)
